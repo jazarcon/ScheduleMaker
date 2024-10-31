@@ -3,22 +3,24 @@ import './styles.css';
 
 function Availability() {
     // Schedule 
-    const hours = (new Array(25)).fill(1).map((_, i) => i);
+    const hours = Array.from({ length: 25 }, (_, i) => i);
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const [availability, setAvailability] = useState({});
     const [isDragging, setIsDragging] = useState(false);
 
     const toggleAvailability = (day, hour) => {
-        const newAvailability = { ...availability };
-        if (newAvailability[day] === undefined) {
-            newAvailability[day] = [];
-        }
-        if (newAvailability[day].includes(hour)) {
-            newAvailability[day] = newAvailability[day].filter(h => h !== hour);
-        } else {
-            newAvailability[day].push(hour);
-        }
-        setAvailability(newAvailability);
+        setAvailability(prevAvailability => {
+            const newAvailability = { ...prevAvailability };
+            if (!newAvailability[day]) {
+                newAvailability[day] = [];
+            }
+            if (newAvailability[day].includes(hour)) {
+                newAvailability[day] = newAvailability[day].filter(h => h !== hour);
+            } else {
+                newAvailability[day].push(hour);
+            }
+            return newAvailability;
+        });
     };
 
     const handleMouseDown = (day, hour) => {
@@ -70,10 +72,9 @@ function Availability() {
                     ))}
                 </tbody>
             </table>
-            <div style={ styles.container }>
+            <div style={styles.container}>
                 <button onClick={clearAvailability}>Clear Availability</button>
             </div>
-
         </div>
     );
 }

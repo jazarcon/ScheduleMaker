@@ -1,22 +1,21 @@
-import { useState } from "react";
-import Availability from "../components/availability";
-import Header from "../components/header.js";
-import NavBar from "../components/navBar.js";
-
+import React from 'react';
+import Availability from '../components/availability';
+import Header from '../components/header';
+import NavBar from '../components/navBar';
 
 function Employee() {
-    // Page for filling out availability
-
-
-    return (
-        <div>           
-            <div className="main">
-                <p>availability</p>
-                <Availability />
-                    
-            </div>
+  return (
+    <div>
+      <Header />
+      <div className="employee-container">
+        <NavBar className="navbar" />
+        <div className="main-content">
+          <h1>Availability</h1>
+          <Availability />
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default Employee;
