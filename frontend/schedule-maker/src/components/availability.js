@@ -3,7 +3,9 @@ import './styles.css';
 
 function Availability() {
     // Schedule 
-    const hours = Array.from({ length: 25 }, (_, i) => i);
+    const hours = [
+        "6AM", "7AM", "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM", "11PM", "12AM"
+    ];
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const [availability, setAvailability] = useState({});
     const [isDragging, setIsDragging] = useState(false);

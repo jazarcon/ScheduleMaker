@@ -1,26 +1,27 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './store'; // Ensure you have a store setup
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { store, persistor } from './store'; // Adjust the path as necessary
+import Header from './components/header';
 import Welcome from './pages/welcome';
 import Employee from './pages/employee';
 
 function App() {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Router>
-          <div className="app-container">
+    <div className="App">
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Router>
+            <Header />
             <Routes>
               <Route path="/" element={<Welcome />} />
               <Route path="/employee" element={<Employee />} />
             </Routes>
-          </div>
-        </Router>
-      </PersistGate>
-    </Provider>
+          </Router>
+        </PersistGate>
+      </Provider>
+    </div>
   );
 }
 
