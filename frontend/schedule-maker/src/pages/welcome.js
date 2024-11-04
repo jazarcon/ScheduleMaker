@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Welcome = () => {
 
-
     return (
         <div className='welcome-container' style={style.Welcome}>
             <h1>Welcome to Schedule Maker</h1>

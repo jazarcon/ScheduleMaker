@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { store, persistor } from './store'; // Adjust the path as necessary
 import Header from './components/header';
 import Welcome from './pages/welcome';
-import Employee from './pages/employee';
+import Schedule from './pages/schedule';
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Welcome />} />
-              <Route path="/employee" element={<Employee />} />
+              <Route path="/schdule" element={<Schedule />} />
             </Routes>
           </Router>
         </PersistGate>
