@@ -3,10 +3,18 @@ import { useTypewriter } from 'react-simple-typewriter';
 import { useNavigate } from 'react-router-dom';
 
 const Welcome = () => {
+    const [text] = useTypewriter({
+        words: ['Welcome to Schedule Maker'],
+        loop: 0,
+        cursorStyle: '|',
+        typeSpeed: 70,
+        deleteSpeed: 0,
+    });
+
 
     return (
         <div className='welcome-container' style={style.Welcome}>
-            <h1>Welcome to Schedule Maker</h1>
+            <h1>{text}</h1>
 
         </div>
     );
