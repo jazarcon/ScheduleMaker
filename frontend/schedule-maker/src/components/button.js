@@ -1,3 +1,4 @@
+import { Colours } from "./styles";
 
 
 export default function Button({ text, onClick }) {
@@ -10,7 +11,7 @@ export default function Button({ text, onClick }) {
 
 const styles = {
     button: {
-        backgroundColor: 'white',
+        backgroundColor: Colours.teritary,
         color: 'black',
         fontSize: '16px',
         padding: '10px 20px',

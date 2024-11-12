@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '../components/button';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,26 +27,55 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Username:</label>
+    <div style={styles.container}>
+      <form style={styles.form} onSubmit={handleSubmit}>
         <input
+          style={styles.input}
           type="text"
+          placeholder="Username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(event) => setUsername(event.target.value)}
         />
-      </div>
-      <div>
-        <label>Password:</label>
         <input
+          style={styles.input}
           type="password"
+          placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
         />
-      </div>
-      <button type="submit">Login</button>
-    </form>
+        <Button text="Login" onClick={() => navigate('/schedule')}/>
+      </form>
+    </div>
   );
 };
 
 export default Login;
+
+const styles = {
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: 'lightgrey',
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '20px',
+    border: '1px solid black',
+    borderRadius: '5px',
+  },
+  input: {
+    margin: '10px',
+    padding: '5px',
+    fontSize: '16px',
+  },
+  button: {
+    padding: '10px 20px',
+    fontSize: '16px',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+  },
+};

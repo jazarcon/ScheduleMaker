@@ -5,7 +5,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { store, persistor } from './store'; // Adjust the path as necessary
 import Header from './components/header';
 import Welcome from './pages/welcome';
+import Login from './pages/login';
+import Signup from './pages/signup';
 import Schedule from './pages/schedule';
+import Calender from './pages/calender';
+import Employee from './pages/employee';
+import Profile from './pages/profile';
 
 function App() {
   return (
@@ -16,7 +21,12 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Welcome />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
               <Route path="/schdule" element={<Schedule />} />
+              <Route path="/calender" element={<Calender />} />
+              <Route path="/employee" element={<Employee />} />
+              <Route path="/profile" element={<Profile />} />
             </Routes>
           </Router>
         </PersistGate>
