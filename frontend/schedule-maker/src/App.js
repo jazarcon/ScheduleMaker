@@ -11,7 +11,6 @@ import Schedule from './pages/schedule';
 import Calender from './pages/calender';
 import Employee from './pages/employee';
 import Profile from './pages/profile';
-import NavBar from './components/navBar';
 
 function App() {
   return (

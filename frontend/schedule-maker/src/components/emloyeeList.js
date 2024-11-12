@@ -18,6 +18,8 @@ const EmployeeList = () => {
     );
 }
 
+export default EmployeeList;
+
 const style = {
     EmployeeList: {
         display: 'flex',

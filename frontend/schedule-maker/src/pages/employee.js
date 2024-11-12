@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import NavBar from '../components/navBar';
 import { Colours } from '../components/styles';
-import EmployeeList from '../components/employeeList';
+import EmployeeList from '../components/emloyeeList';
 import AddEmployee from '../components/addEmployee';
 
 const Employee = () => {
@@ -51,7 +51,8 @@ const styles = {
         width: '100%',
     },
     content: {
-        width: '80%',
+        height: '80%',
+        width: '100%',
         backgroundColor: Colours.primary,
         padding: '20px',
         borderRadius: '8px',

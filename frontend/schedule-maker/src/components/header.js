@@ -43,7 +43,7 @@ const styles = {
     fontSize: '30px',
     color: 'black',
     border: 'none', 
-    position: 'relative',
+    position: 'fixed',
   },
   title: {
     color: Colours.quaternary,
