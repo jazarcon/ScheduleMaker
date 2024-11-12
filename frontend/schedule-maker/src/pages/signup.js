@@ -14,7 +14,7 @@ const Signup = () => {
                 <input style={style.textfield} type='text' placeholder='Store' />
                 <input style={style.textfield} type='password' placeholder='Password' />
                 <input style={style.textfield} type='password' placeholder='Confirm Password' />
-                <Button text='Signup' onClick={() => navigate('/schedule')} />
+                <Button text='Signup' onClick={() => navigate('/employee')} />
             </form>
         </div>
     );

@@ -11,6 +11,7 @@ import Schedule from './pages/schedule';
 import Calender from './pages/calender';
 import Employee from './pages/employee';
 import Profile from './pages/profile';
+import NavBar from './components/navBar';
 
 function App() {
   return (
@@ -23,7 +24,7 @@ function App() {
               <Route path="/" element={<Welcome />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/schdule" element={<Schedule />} />
+              <Route path="/schedule" element={<Schedule />} />
               <Route path="/calender" element={<Calender />} />
               <Route path="/employee" element={<Employee />} />
               <Route path="/profile" element={<Profile />} />

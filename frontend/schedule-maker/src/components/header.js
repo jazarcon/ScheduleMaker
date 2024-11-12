@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from './button';
-import { Colours, FontSizes, Spacing } from './styles';
+import { Colours, FontSizes } from './styles';
 
 function Header() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default Header;
 const styles = {
   container: {
     display: 'flex',
-    height: '10vh',
+    //height: '10vh',
     flexDirection: 'column',
     alignItems: 'center',
     border: 'none',
@@ -37,7 +37,7 @@ const styles = {
     alignItems: 'center',
     width: '100%',
     height: '100hw',
-    padding: '0 20px',
+    padding: '0 10px',
     backgroundColor: Colours.primary,
     textAlign: 'center',
     fontSize: '30px',

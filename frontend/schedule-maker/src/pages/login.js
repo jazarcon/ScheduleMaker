@@ -45,7 +45,7 @@ const Login = () => {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
-        <Button text="Login" onClick={() => navigate('/schedule')}/>
+        <Button text="Login" onClick={() => navigate('/employee')}/>
       </form>
     </div>
   );
