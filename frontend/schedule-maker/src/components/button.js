@@ -12,7 +12,7 @@ export default function Button({ text, onClick }) {
 const styles = {
     button: {
         backgroundColor: Colours.teritary,
-        color: 'black',
+        color: Colours.quinary,
         fontSize: '16px',
         padding: '10px 20px',
         border: 'none',

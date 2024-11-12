@@ -14,9 +14,13 @@ const Welcome = () => {
 
 
     return (
-        <div className='welcome-container' style={style.Welcome}>
-            <h1>{text}</h1>
+        <div>
+            <div className='welcome-container' style={style.Welcome}>
+                <h1>{text}</h1>
+            </div>
+            <h1>About</h1>
         </div>
+
     );
 };
 
@@ -27,7 +31,8 @@ const style = {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
+        height: '75vh',
+        width: '100%',
         color: 'white',
         backgroundColor: Colours.secondary,
         fontSize: FontSizes.large,

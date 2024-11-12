@@ -11,8 +11,11 @@ function Header() {
     <div style={styles.container}>
       <div style={styles.header}>
         <h1 style={styles.title}>Schedule Maker</h1>
-        <Button text="Signup" onClick={() => navigate('/signup')} />
-        <Button text="Login" onClick={() => navigate('/login')} />
+          <div style={styles.buttons}>
+            <Button text="Signup" onClick={() => navigate('/signup')} />
+            <Button text="Login" onClick={() => navigate('/login')} />          
+          </div>      
+
       </div>
     </div>
   );
@@ -21,26 +24,38 @@ function Header() {
 export default Header;
 
 const styles = {
-    container : {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    header: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        padding: '0 20px',
-        backgroundColor: Colours.primary,
-        textAlign: 'center',
-        fontSize: '30px',
-        color: 'black',
-    },
-    title: {
-        color: Colours.quaternary,
-        fontSize: FontSizes.large,
-    },
+  container: {
+    display: 'flex',
+    height: '10vh',
+    flexDirection: 'column',
+    alignItems: 'center',
+    border: 'none',
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+    height: '100hw',
+    padding: '0 20px',
+    backgroundColor: Colours.primary,
+    textAlign: 'center',
+    fontSize: '30px',
+    color: 'black',
+    border: 'none', 
+    position: 'relative',
+  },
+  title: {
+    color: Colours.quaternary,
+    fontSize: FontSizes.large,
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: '10px',
+    right: '20px',
+  },
 
 }

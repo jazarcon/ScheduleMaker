@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/button';
+import { Colours, FontSizes } from '../components/styles';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ const Login = () => {
 
   return (
     <div style={styles.container}>
+      <h1 style={styles.title}>Login</h1>
       <form style={styles.form} onSubmit={handleSubmit}>
         <input
           style={styles.input}
@@ -54,22 +56,31 @@ export default Login;
 const styles = {
   container: {
     display: 'flex',
-    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'lightgrey',
+    height: '100vh',
+    width: '100vw',
+    weight: '100vw',
+    flexDirection: 'column',
+    backgroundColor: Colours.secondary,
+  },
+  title: {
+    color: Colours.quaternary,
+    fontSize: FontSizes.large,
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     padding: '20px',
+    backgroundColor: Colours.primary,
     border: '1px solid black',
     borderRadius: '5px',
   },
   input: {
-    margin: '10px',
-    padding: '5px',
-    fontSize: '16px',
+    margin: '10px 0',
+    padding: '10px',
+    fontSize: FontSizes.medium,
   },
   button: {
     padding: '10px 20px',
