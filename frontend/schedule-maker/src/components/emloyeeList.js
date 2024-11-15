@@ -1,5 +1,7 @@
 import { Colours, FontSizes, Spacing } from "./styles";
 import { useNavigate } from "react-router-dom";
+import { Flex } from "@chakra-ui/react";
+import Button from "./button";
 
 const EmployeeList = () => {
     const navigate = useNavigate();
@@ -7,13 +9,10 @@ const EmployeeList = () => {
     return (
         <div className='employee-list-container' style={style.EmployeeList}>
             <h1 style={style.title}>Employee List</h1>
-            <form style={style.form}>
-                <input style={style.textfield} type='text' placeholder='Employee Name' />
-                <input style={style.textfield} type='text' placeholder='Employee ID' />
-                <input style={style.textfield} type='text' placeholder='Employee Position' />
-                <input style={style.textfield} type='text' placeholder='Employee Availability' />
-                <button style={style.button} onClick={() => navigate('/employee')}>Add Employee</button>
-            </form>
+                <Flex direction='column' alignItems='center' justifyContent='center'>
+                    
+                    <Button>Add Employee</Button>
+                </Flex>
         </div>
     );
 }

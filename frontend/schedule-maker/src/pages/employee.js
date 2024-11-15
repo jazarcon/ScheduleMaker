@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel, color } from '@chakra-ui/react';
 import NavBar from '../components/navBar';
-import { Colours } from '../components/styles';
+import { Colours, FontSizes } from '../components/styles';
 import EmployeeList from '../components/emloyeeList';
 import AddEmployee from '../components/addEmployee';
 
@@ -13,10 +13,10 @@ const Employee = () => {
 
     return (
         <div>
-            <NavBar />
+            {/* <NavBar /> */}
             <div style={styles.container}>
                 <div style={styles.content}>
-                    <Tabs>
+                    <Tabs align='center'>
                         <TabList>
                             <Tab>Employee List</Tab>
                             <Tab>Add Employee</Tab>
@@ -47,10 +47,11 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
-        height: '100vh',
+        height: '100%',
         width: '100%',
     },
     content: {
+        justifyContent: 'center',
         height: '80%',
         width: '100%',
         backgroundColor: Colours.primary,
@@ -63,4 +64,9 @@ const styles = {
         fontSize: '24px',
         marginBottom: '20px',
     },
+    tablist: {
+        color: Colours.quaternary,
+        fontSize: FontSizes.medium,
+        marginBottom: '20px',
+    }
 };
