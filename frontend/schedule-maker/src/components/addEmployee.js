@@ -1,15 +1,24 @@
+import Availability from "./availability";
+import Button from "./button";
 import { Colours, FontSizes, Spacing } from "./styles";
 
 const AddEmployee = () => {
     return (
         <div className='add-employee-container' style={style.AddEmployee}>
-            <h1 style={style.title}>Add Employee</h1>
             <form style={style.form}>
                 <input style={style.textfield} type='text' placeholder='Employee Name' />
                 <input style={style.textfield} type='text' placeholder='Employee ID' />
-                <input style={style.textfield} type='text' placeholder='Employee Position' />
-                <input style={style.textfield} type='text' placeholder='Employee Availability' />
-                <button style={style.button}>Add Employee</button>
+                <select style={style.select}>
+                    <option value='' disabled>Select Role</option>
+                    <option value='manager'>Manager</option>
+                    <option value= 'assistant'>Assistant</option>
+                    <option value='key holder '>Key Holder</option>
+                    <option value='stylist'>Stylist</option>
+                </select>
+                <div style={style.availabilityContainter}>
+                    <Availability />
+                </div>
+                <Button text='Add Employee' />
             </form>
         </div>
     );
@@ -21,8 +30,9 @@ const style = {
     AddEmployee: {
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         flexDirection: 'column',
-        height: '100vh',
+        height: '100%',
         width: '100%',
         color: 'white',
         backgroundColor: Colours.secondary,
@@ -42,18 +52,20 @@ const style = {
         borderRadius: '5px',
         spacebetween: '15px',
     },
+    select: {
+        margin: Spacing.small,
+        padding: Spacing.small,
+        fontSize: FontSizes.medium,
+    },
     textfield: {
         margin: Spacing.small,
         padding: Spacing.small,
         fontSize: FontSizes.medium,
     },
-    button: {
+    availabilityContainter: {
         margin: Spacing.small,
         padding: Spacing.small,
         fontSize: FontSizes.medium,
-        backgroundColor: Colours.quaternary,
-        color: Colours.secondary,
-        border: 'none',
-        borderRadius: '5px',
-    },
+    }
+
 };

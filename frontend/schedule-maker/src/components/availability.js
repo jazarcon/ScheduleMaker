@@ -1,45 +1,49 @@
 import { useState } from "react";
+import { Cursor } from "react-simple-typewriter";
+import Button from "./button";
+import { Colours } from "./styles";
 
-function Availability() {
-    // Schedule 
-    const hours = [
-        "6AM", "7AM", "8AM", "9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM", "6PM", "7PM", "8PM", "9PM", "10PM", "11PM", "12AM"
-    ];
-    const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const Availability = () => {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const hours = ['8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM', '12 AM', '1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM'];
+
     const [availability, setAvailability] = useState({});
-    const [isDragging, setIsDragging] = useState(false);
-
-    const toggleAvailability = (day, hour) => {
-        setAvailability(prevAvailability => {
-            const newAvailability = { ...prevAvailability };
-            if (!newAvailability[day]) {
-                newAvailability[day] = [];
-            }
-            if (newAvailability[day].includes(hour)) {
-                newAvailability[day] = newAvailability[day].filter(h => h !== hour);
-            } else {
-                newAvailability[day].push(hour);
-            }
-            return newAvailability;
-        });
-    };
+    const [mouseDown, setMouseDown] = useState(false);
 
     const handleMouseDown = (day, hour) => {
-        setIsDragging(true);
+        setMouseDown(true);
         toggleAvailability(day, hour);
     };
 
-    const handleMouseUp = () => {
-        setIsDragging(false);
-    };
-
     const handleMouseEnter = (day, hour) => {
-        if (isDragging) {
+        if (mouseDown) {
             toggleAvailability(day, hour);
         }
     };
 
-    const clearAvailability = () => {
+    const handleMouseUp = () => {
+        setMouseDown(false);
+    };
+
+    const toggleAvailability = (day, hour) => {
+        setAvailability(prevAvailability => {
+            const dayAvailability = prevAvailability[day] || [];
+            if (dayAvailability.includes(hour)) {
+                return {
+                    ...prevAvailability,
+                    [day]: dayAvailability.filter(h => h !== hour),
+                };
+            } else {
+                return {
+                    ...prevAvailability,
+                    [day]: [...dayAvailability, hour],
+                };
+            }
+        });
+    };
+
+    const clearAvailability = (event) => {
+        event.preventDefault(); // Prevent the default form submission behavior
         setAvailability({});
     };
 
@@ -49,24 +53,25 @@ function Availability() {
                 <thead>
                     <tr>
                         <th></th>
-                        {hours.map(hour => (
-                            <th key={hour}>{hour}</th>
+                        {days.map(day => (
+                            <th key={day}>{day}</th>
                         ))}
                     </tr>
                 </thead>
                 <tbody>
-                    {days.map(day => (
-                        <tr key={day}>
-                            <td>{day}</td>
-                            {hours.map(hour => (
+                    {hours.map(hour => (
+                        <tr key={hour}>
+                            <td>{hour}</td>
+                            {days.map(day => (
                                 <td
                                     className="table-cell"
-                                    key={hour}
+                                    key={`${day}-${hour}`}
                                     onMouseDown={() => handleMouseDown(day, hour)}
                                     onMouseEnter={() => handleMouseEnter(day, hour)}
                                     style={{
-                                        backgroundColor: availability[day] && availability[day].includes(hour) ? 'lightgreen' : 'white'
+                                        backgroundColor: availability[day]?.includes(hour) ? Colours.teritary : 'white',
                                     }}
+                                    onClick={() => toggleAvailability(day, hour)}
                                 ></td>
                             ))}
                         </tr>
@@ -74,11 +79,11 @@ function Availability() {
                 </tbody>
             </table>
             <div style={styles.container}>
-                <button onClick={clearAvailability}>Clear Availability</button>
+                <Button text="Clear Availability" onClick={clearAvailability} />
             </div>
         </div>
     );
-}
+};
 
 export default Availability;
 

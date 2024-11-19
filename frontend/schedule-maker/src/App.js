@@ -14,21 +14,23 @@ import Profile from './pages/profile';
 
 function App() {
   return (
-    <div className="App">
+    <div style={styles.app}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Router>
-            <Header />
-            <Routes>
-              <Route path="/" element={<Welcome />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/schedule" element={<Schedule />} />
-              <Route path="/calender" element={<Calender />} />
-              <Route path="/employee" element={<Employee />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-          </Router>
+              <Header />
+              <div style={styles.container}>
+              <Routes>
+                <Route path="/" element={<Welcome />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/schedule" element={<Schedule />} />
+                <Route path="/calender" element={<Calender />} />
+                <Route path="/employee" element={<Employee />} />
+                <Route path="/profile" element={<Profile />} />
+              </Routes>
+              </div>
+            </Router>
         </PersistGate>
       </Provider>
     </div>
@@ -36,3 +38,16 @@ function App() {
 }
 
 export default App;
+
+const styles = {
+  app: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  container: {
+    flexGrow: 1,
+    overflowY: 'auto',
+    // paddingTop: '100px',
+  },
+}
