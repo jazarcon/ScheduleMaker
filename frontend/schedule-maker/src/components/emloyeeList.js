@@ -2,16 +2,40 @@ import { Colours, FontSizes, Spacing } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { Flex } from "@chakra-ui/react";
 import Button from "./button";
+import EmployeeTag from "./emloyeeTag";
 
 const EmployeeList = () => {
     const navigate = useNavigate();
 
+    const employees = [
+        {
+            name: 'John Doe',
+            id: '15001',
+            role: 'Manager',
+        },
+        {
+            name: 'Jane Doe',
+            id: '15002',
+            role: 'Assistant',
+        },
+        {
+            name: 'Rick Roll',
+            id: '15003',
+            role: 'Key Holder',
+        },
+        {
+            name: 'Sponge Bob',
+            id: '15004',
+            role: 'Stylist',
+        }
+    ]
+
     return (
         <div className='employee-list-container' style={style.EmployeeList}>
-            <h1 style={style.title}>Employee List</h1>
-                <Flex direction='column' alignItems='center' justifyContent='center'>
-                    
-                    <Button>Add Employee</Button>
+                <Flex direction='column' alignItems='center' justifyContent='center' >
+                    {employees.map((employee) => (
+                        <EmployeeTag key={employee.id} employee={employee} />
+                    ))}
                 </Flex>
         </div>
     );
@@ -29,33 +53,9 @@ const style = {
         color: 'white',
         backgroundColor: Colours.secondary,
         fontSize: FontSizes.large,
+        overflowY: 'auto'
     },
-    title: {
-        color: Colours.quaternary,
-        fontSize: FontSizes.large,
-    },
-    form: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: Spacing.medium,
-        backgroundColor: Colours.primary,
-        border: '1px solid black',
-        borderRadius: '5px',
-        spacebetween: '15px',
-    },
-    textfield: {
-        margin: Spacing.small,
-        padding: Spacing.small,
-        fontSize: FontSizes.medium,
-    },
-    button: {
-        margin: Spacing.small,
-        padding: Spacing.small,
-        fontSize: FontSizes.medium,
-        backgroundColor: Colours.quaternary,
-        color: Colours.secondary,
-        border: 'none',
-        borderRadius: '5px',
-    },
+    list:{
+        width: '100%',
+    }
 };

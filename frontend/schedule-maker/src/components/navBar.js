@@ -1,16 +1,21 @@
 import React from 'react';
-import { FontSizes, Spacing } from './styles';
+import { Colours, FontSizes, Spacing } from './styles';
+import { useNavigate } from 'react-router-dom';
+import { Flex } from '@chakra-ui/react';
 function NavBar() {
+    let navigate = useNavigate();
+
     return (
-        <nav style={styles.nav}>
+        <Flex style={styles.nav}>
             <ul style={styles.ul}>
-                <li style={styles.li}>Home</li>
-                <li style={styles.li}>Schedule</li>
-                <li style={styles.li}>Employee</li>
-                <li style={styles.li}>Calendar</li>
-                <li style={styles.li}>Profile</li>
+                <li style={styles.li} onClick={() => navigate('/welcome')}>Welcome</li>
+                <li style={styles.li} onClick={() => navigate('/schedule')}>Schedule</li>
+                <li style={styles.li} onClick={() => navigate('/calender')}>Calender</li>
+                <li style={styles.li} onClick={() => navigate('/employee')}>Employee</li>
+                <li style={styles.li} onClick={() => navigate('/profile')}>Profile</li>
             </ul>
-        </nav>
+        </Flex>
+
     )
 }
 
@@ -21,12 +26,12 @@ const styles = {
         display: 'flex',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
-        height: '100vh',
+        height: '100%',
         width: '15%',
-        backgroundColor: 'black',
+        backgroundColor: Colours.primary,
         color: 'white',
         position: 'fixed',
-        top: '15vh',
+        top: '100px',
         left: 0,
         padding: '20px 0',
         zIndex: 1,

@@ -43,11 +43,11 @@ const styles = {
   app: {
     display: 'flex',
     flexDirection: 'column',
-    height: '100vh',
+    alignItems: 'center',
   },
   container: {
     flexGrow: 1,
     overflowY: 'auto',
-    paddingTop: '100px',
+    // paddingTop: '100px',
   },
 }

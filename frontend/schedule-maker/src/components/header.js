@@ -9,7 +9,7 @@ function Header() {
   return (
     <div style={styles.container}>
       <div style={styles.header}>
-        <h1 style={styles.title}>Schedule Maker</h1>
+        <h1 style={styles.title}> Schedule Maker</h1>
         <div style={styles.buttons}>
           <Button text="Signup" onClick={() => navigate('/signup')} />
           <Button text="Login" onClick={() => navigate('/login')} />
@@ -31,8 +31,9 @@ const styles = {
     width: '100%',
     position: 'fixed',
     top: 0,
-    zIndex: 1000,
+    left: 0,
     backgroundColor: Colours.primary,
+    zIndex: 1000,
   },
   header: {
     display: 'flex',
@@ -40,10 +41,8 @@ const styles = {
     alignItems: 'center',
     width: '100%',
     height: '100%',
-    padding: '0 20px',
     textAlign: 'center',
     fontSize: '30px',
-    color: 'black',
     border: 'none',
     position: 'relative',
   },
