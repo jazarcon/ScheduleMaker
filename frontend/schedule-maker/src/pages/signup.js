@@ -28,7 +28,7 @@ const style = {
         alignItems: 'center',
         flexDirection: 'column',
         height: '100vh',
-        width: '100%',
+        width: '100vw',
         color: 'white',
         backgroundColor: Colours.secondary,
         fontSize: FontSizes.large,

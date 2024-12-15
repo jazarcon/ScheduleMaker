@@ -8,7 +8,7 @@ function NavBar() {
     return (
         <Flex style={styles.nav}>
             <ul style={styles.ul}>
-                <li style={styles.li} onClick={() => navigate('/welcome')}>Welcome</li>
+                <li style={styles.li} onClick={() => navigate('/')}>Welcome</li>
                 <li style={styles.li} onClick={() => navigate('/schedule')}>Schedule</li>
                 <li style={styles.li} onClick={() => navigate('/calender')}>Calender</li>
                 <li style={styles.li} onClick={() => navigate('/employee')}>Employee</li>
