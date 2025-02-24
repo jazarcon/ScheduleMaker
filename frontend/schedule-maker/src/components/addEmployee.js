@@ -1,8 +1,36 @@
+import axios from "axios";
+
 import Availability from "./availability";
+import { useNavigate } from "react-router-dom";
 import Button from "./button";
 import { Colours, FontSizes, Spacing } from "./styles";
 
 const AddEmployee = () => {
+
+    const navigate = useNavigate();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const data = {
+            name: e.target[0].value,
+            id: e.target[1].value,
+            role: e.target[2].value,
+            availability: e.target[3].value,
+        }
+
+        axios.post('http://localhost:8000/api/employees/', data)
+            .then(response => {
+                console.log('Employee created:', response.data);
+                navigate('/employees');
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+    };
+    
+
+
     return (
         <div className='add-employee-container' style={style.AddEmployee}>
             <form style={style.form}>
