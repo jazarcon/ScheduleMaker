@@ -2,6 +2,7 @@ import React from 'react';
 import { useTypewriter } from 'react-simple-typewriter';
 import { useNavigate } from 'react-router-dom';
 import { Colours, FontSizes, Spacing } from '../components/styles';
+import { position } from '@chakra-ui/react';
 
 const Welcome = () => {
     const [text] = useTypewriter({
@@ -31,10 +32,11 @@ const style = {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '75vh',
-        width: '100%',
+        height: '100vh',
+        width: '99vw', // Set a fixed width
         color: 'white',
         backgroundColor: Colours.secondary,
         fontSize: FontSizes.large,
+        overflow: 'hidden', // Prevent the background from expanding
     },
 };

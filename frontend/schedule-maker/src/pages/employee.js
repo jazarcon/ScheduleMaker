@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Tabs, TabList, TabPanels, Tab, TabPanel, color, background, position } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import NavBar from '../components/navBar';
 import { Colours, FontSizes } from '../components/styles';
 import EmployeeList from '../components/emloyeeList';
 import AddEmployee from '../components/addEmployee';
 
 const Employee = () => {
-    const [employees, setEmployees] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [employees, setEmployees] = useState([
+        { name: 'John Doe', id: '15001', role: 'Manager' },
+        { name: 'Jane Doe', id: '15002', role: 'Assistant' },
+        { name: 'Rick Roll', id: '15003', role: 'Key Holder' },
+        { name: 'Sponge Bob', id: '15004', role: 'Stylist' }
+    ]);
     const [selectedTab, setSelectedTab] = useState(0);
 
     const handleTabChange = (index) => {
         setSelectedTab(index);
+    };
+
+    const addNewEmployee = (newEmployee) => {
+        setEmployees(prev => [...prev, newEmployee]);
+        setSelectedTab(0);
     };
 
     return (
@@ -28,10 +36,10 @@ const Employee = () => {
 
                         <TabPanels>
                             <TabPanel>
-                                <EmployeeList />
+                                <EmployeeList employees={employees} />
                             </TabPanel>
                             <TabPanel>
-                                <AddEmployee />
+                                <AddEmployee onAddEmployee={addNewEmployee} />
                             </TabPanel>
                         </TabPanels>
                     </Tabs>
