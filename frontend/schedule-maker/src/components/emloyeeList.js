@@ -1,42 +1,22 @@
 import { Colours, FontSizes, Spacing } from "./styles";
-import { useNavigate } from "react-router-dom";
 import { Flex } from "@chakra-ui/react";
 import Button from "./button";
 import EmployeeTag from "./emloyeeTag";
 
-const EmployeeList = () => {
+const EmployeeList = ({ employees = [] }) => {
     const navigate = useNavigate();
-
-    const employees = [
-        {
-            name: 'John Doe',
-            id: '15001',
-            role: 'Manager',
-        },
-        {
-            name: 'Jane Doe',
-            id: '15002',
-            role: 'Assistant',
-        },
-        {
-            name: 'Rick Roll',
-            id: '15003',
-            role: 'Key Holder',
-        },
-        {
-            name: 'Sponge Bob',
-            id: '15004',
-            role: 'Stylist',
-        }
-    ]
 
     return (
         <div className='employee-list-container' style={style.EmployeeList}>
-                <Flex direction='column' alignItems='center' justifyContent='center' >
-                    {employees.map((employee) => (
+            <Flex direction='column' alignItems='center' justifyContent='center' >
+                {employees.length > 0 ? (
+                    employees.map((employee) => (
                         <EmployeeTag key={employee.id} employee={employee} />
-                    ))}
-                </Flex>
+                    ))
+                ) : (
+                    <div style={{ color: 'white', padding: '16px' }}>No employees found yet.</div>
+                )}
+            </Flex>
         </div>
     );
 }
