@@ -1,1 +1,36 @@
-node_modules
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Database
+*.sqlite3
+db.sqlite3
+*.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+dist/
+build/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS
+.DS_Store
+Thumbs.db
