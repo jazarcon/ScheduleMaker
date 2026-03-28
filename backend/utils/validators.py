@@ -1,19 +1,18 @@
-def validate_employee_data(employee):
-    """
-    Validate employee data before processing.
-    """
+def validate_employee_data(data):
+    """Validate employee input data"""
     errors = []
-
-    if not employee.get('name'):
-        errors.append('Name is required.')
-
-    if not employee.get('email') or '@' not in employee['email']:
-        errors.append('Valid email is required.')
-
-    if not employee.get('age') or not (18 <= employee['age'] <= 65):
-        errors.append('Age must be between 18 and 65.')
-
-    if not employee.get('department'):
-        errors.append('Department is required.')
-
+    
+    if not data.get('name') or not isinstance(data.get('name'), str):
+        errors.append('name is required and must be a string')
+    
+    if not data.get('id') or not isinstance(data.get('id'), str):
+        errors.append('id is required and must be a string')
+    
+    if not data.get('role') or not isinstance(data.get('role'), str):
+        errors.append('role is required and must be a string')
+    
+    valid_roles = ['manager', 'assistant', 'key holder', 'stylist']
+    if data.get('role') and data.get('role').lower() not in valid_roles:
+        errors.append(f"role must be one of: {', '.join(valid_roles)}")
+    
     return errors

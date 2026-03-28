@@ -1,5 +1,6 @@
-from .tasks import *  # Import your task routes here
+from flask import Blueprint
+from .employees import employees_bp
 
-# Add your route registrations
-# Example:
-# app.register_blueprint(tasks.blueprint)  
+def register_routes(app):
+    """Register all blueprints"""
+    app.register_blueprint(employees_bp)

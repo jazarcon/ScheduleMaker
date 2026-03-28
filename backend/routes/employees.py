@@ -1,50 +1,73 @@
-from flask import Blueprint, jsonify, request, abort
+from flask import Blueprint, request, jsonify
+from backend.services import EmployeeService
+from backend.utils.validators import validate_employee_data
 
-# Create a Blueprint for employee routes
-employee_bp = Blueprint('employee', __name__)
+employees_bp = Blueprint('employees', __name__, url_prefix='/api/employees')
 
-# Sample data storage (in-memory for demonstration purposes)
-employees = []
+@employees_bp.route('', methods=['GET'])
+def get_all_employees():
+    """Get all employees"""
+    try:
+        employees = EmployeeService.get_all_employees()
+        return jsonify([emp.to_dict() for emp in employees]), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-@employee_bp.route('/employees', methods=['GET'])
-def get_employees():
-    """Get list of employees"""
-    return jsonify(employees), 200
-
-@employee_bp.route('/employees', methods=['POST'])
-def add_employee():
-    """Add a new employee"""
-    if not request.json or 'name' not in request.json:
-        abort(400)
-    employee = {'id': len(employees) + 1, 'name': request.json['name']}
-    employees.append(employee)
-    return jsonify(employee), 201
-
-@employee_bp.route('/employees/<int:employee_id>', methods=['GET'])
+@employees_bp.route('/<employee_id>', methods=['GET'])
 def get_employee(employee_id):
-    """Get a specific employee by ID"""
-    employee = next((emp for emp in employees if emp['id'] == employee_id), None)
-    if employee is None:
-        abort(404)
-    return jsonify(employee), 200
+    """Get a specific employee"""
+    try:
+        employee = EmployeeService.get_employee_by_id(employee_id)
+        if not employee:
+            return jsonify({'error': 'Employee not found'}), 404
+        return jsonify(employee.to_dict()), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-@employee_bp.route('/employees/<int:employee_id>', methods=['PUT'])
+@employees_bp.route('', methods=['POST'])
+def create_employee():
+    """Create a new employee"""
+    data = request.get_json()
+    
+    # Validate input
+    errors = validate_employee_data(data)
+    if errors:
+        return jsonify({'error': 'Validation failed', 'details': errors}), 400
+    
+    try:
+        employee = EmployeeService.create_employee(data)
+        return jsonify(employee.to_dict()), 201
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 409
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@employees_bp.route('/<employee_id>', methods=['PUT'])
 def update_employee(employee_id):
-    """Update an existing employee"""
-    employee = next((emp for emp in employees if emp['id'] == employee_id), None)
-    if employee is None:
-        abort(404)
-    if not request.json:
-        abort(400)
-    employee['name'] = request.json.get('name', employee['name'])
-    return jsonify(employee), 200
+    """Update an employee"""
+    data = request.get_json()
+    
+    # Validate input (partial validation for updates)
+    if data.get('role'):
+        valid_roles = ['manager', 'assistant', 'key holder', 'stylist']
+        if data.get('role').lower() not in valid_roles:
+            return jsonify({'error': f"role must be one of: {', '.join(valid_roles)}"}), 400
+    
+    try:
+        employee = EmployeeService.update_employee(employee_id, data)
+        return jsonify(employee.to_dict()), 200
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-@employee_bp.route('/employees/<int:employee_id>', methods=['DELETE'])
+@employees_bp.route('/<employee_id>', methods=['DELETE'])
 def delete_employee(employee_id):
     """Delete an employee"""
-    global employees
-    employees = [emp for emp in employees if emp['id'] != employee_id]
-    return jsonify({'result': True}), 204
-
-# You would typically register this blueprint in your main app file
-# For example: app.register_blueprint(employee_bp)
+    try:
+        EmployeeService.delete_employee(employee_id)
+        return jsonify({'message': 'Employee deleted successfully'}), 200
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500

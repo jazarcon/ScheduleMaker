@@ -9,6 +9,8 @@ const AddEmployee = ({ onAddEmployee }) => {
         id: '',
         role: ''
     });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -16,16 +18,42 @@ const AddEmployee = ({ onAddEmployee }) => {
             ...prev,
             [name]: value
         }));
+        setError(''); // Clear error when user types
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
         
-        if (formData.name && formData.id && formData.role) {
-            onAddEmployee(formData);
+        if (!formData.name || !formData.id || !formData.role) {
+            setError('Please fill in all fields');
+            return;
+        }
+
+        setLoading(true);
+        try {
+            const response = await fetch('http://localhost:5000/api/employees', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || errorData.details?.[0] || 'Failed to add employee');
+            }
+
+            const newEmployee = await response.json();
+            onAddEmployee(newEmployee);
             setFormData({ name: '', id: '', role: '' });
-        } else {
-            alert('Please fill in all fields');
+            alert('Employee added successfully!');
+        } catch (err) {
+            setError(err.message);
+            console.error('Error:', err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -39,6 +67,7 @@ const AddEmployee = ({ onAddEmployee }) => {
                     name='name'
                     value={formData.name}
                     onChange={handleChange}
+                    disabled={loading}
                 />
                 <input 
                     style={style.textfield} 
@@ -47,12 +76,14 @@ const AddEmployee = ({ onAddEmployee }) => {
                     name='id'
                     value={formData.id}
                     onChange={handleChange}
+                    disabled={loading}
                 />
                 <select 
                     style={style.select}
                     name='role'
                     value={formData.role}
                     onChange={handleChange}
+                    disabled={loading}
                 >
                     <option value='' disabled>Select Role</option>
                     <option value='manager'>Manager</option>
@@ -63,7 +94,8 @@ const AddEmployee = ({ onAddEmployee }) => {
                 <div style={style.availabilityContainter}>
                     <Availability />
                 </div>
-                <Button text='Add Employee' type='submit' />
+                {error && <p style={style.error}>{error}</p>}
+                <Button text={loading ? 'Adding...' : 'Add Employee'} type='submit' disabled={loading} />
             </form>
         </div>
     );
@@ -111,5 +143,11 @@ const style = {
         margin: Spacing.small,
         padding: Spacing.small,
         fontSize: FontSizes.medium,
+    },
+    error: {
+        color: '#ff6b6b',
+        marginTop: '10px',
+        fontSize: '14px',
+        textAlign: 'center'
     }
 };
