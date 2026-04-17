@@ -12,8 +12,22 @@ const EmployeeList = ({ employees }) => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        fetchEmployees();
+        if (!employees || employees.length === 0) {
+            fetchEmployees();
+        }
     }, []);
+
+    const sortEmployees = (employeeArray) => {
+        return [...employeeArray].sort((a, b) => {
+            const aNum = Number(a.id);
+            const bNum = Number(b.id);
+
+            if (!Number.isNaN(aNum) && !Number.isNaN(bNum)) {
+                return aNum - bNum;
+            }
+            return String(a.id).localeCompare(String(b.id));
+        });
+    };
 
     const fetchEmployees = async () => {
         setLoading(true);
@@ -26,7 +40,7 @@ const EmployeeList = ({ employees }) => {
             }
             
             const data = await response.json();
-            setEmployeeList(data);
+            setEmployeeList(sortEmployees(data));
         } catch (err) {
             setError(err.message);
             console.error('Error:', err);
@@ -39,10 +53,16 @@ const EmployeeList = ({ employees }) => {
 
     // Update list when prop changes (when new employee is added)
     useEffect(() => {
-        if (employees && employees.length > employeeList.length) {
-            setEmployeeList(employees);
+        if (employees) {
+            setEmployeeList(sortEmployees(employees));
+            setLoading(false);
         }
     }, [employees]);
+
+    const handleDeleteEmployee = (employeeId) => {
+        // Remove employee from the list
+        setEmployeeList(employeeList.filter(emp => emp.id !== employeeId));
+    };
 
     return (
         <div className='employee-list-container' style={style.EmployeeList}>
@@ -54,7 +74,7 @@ const EmployeeList = ({ employees }) => {
             ) : (
                 <Flex direction='column' alignItems='center' justifyContent='center'>
                     {employeeList.map((employee) => (
-                        <EmployeeTag key={employee.id} employee={employee} />
+                        <EmployeeTag key={employee.id} employee={employee} onDelete={handleDeleteEmployee} />
                     ))}
                 </Flex>
             )}

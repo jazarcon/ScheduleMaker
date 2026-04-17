@@ -4,7 +4,26 @@ import { AiOutlineEdit, AiFillDelete } from "react-icons/ai";
 import { Colours } from './styles'; // Ensure Colours is correctly imported
 
 
-const EmployeeTag = ({ employee }) => {
+const EmployeeTag = ({ employee, onDelete }) => {
+    const handleDelete = async () => {
+        if (window.confirm(`Are you sure you want to delete ${employee.name}?`)) {
+            try {
+                const response = await fetch(`http://localhost:5000/api/employees/${employee.id}`, {
+                    method: 'DELETE',
+                });
+                
+                if (response.ok) {
+                    onDelete(employee.id);
+                } else {
+                    alert('Failed to delete employee');
+                }
+            } catch (error) {
+                console.error('Error deleting employee:', error);
+                alert('Error deleting employee');
+            }
+        }
+    };
+
     return (
         <Box 
             borderWidth='1px' 
@@ -48,6 +67,7 @@ const EmployeeTag = ({ employee }) => {
                         width='50px'
                         background={Colours.teritary}
                         borderRadius={10}
+                        onClick={handleDelete}
                     />
                 </Flex>
             </Stack>

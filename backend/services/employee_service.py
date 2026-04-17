@@ -6,7 +6,7 @@ class EmployeeService:
     @staticmethod
     def get_all_employees():
         """Retrieve all employees"""
-        return Employee.query.all()
+        return Employee.query.order_by(Employee.id.asc()).all()
     
     @staticmethod
     def get_employee_by_id(employee_id):
@@ -23,7 +23,8 @@ class EmployeeService:
         employee = Employee(
             id=emp_data['id'],
             name=emp_data['name'],
-            role=emp_data['role']
+            role=emp_data['role'],
+            availability=emp_data.get('availability')
         )
         db.session.add(employee)
         db.session.commit()
@@ -38,6 +39,8 @@ class EmployeeService:
         
         employee.name = emp_data.get('name', employee.name)
         employee.role = emp_data.get('role', employee.role)
+        if 'availability' in emp_data:
+            employee.availability = emp_data['availability']
         db.session.commit()
         return employee
     

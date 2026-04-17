@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import Availability from "./availability";
 import Button from "./button";
 import { Colours, FontSizes, Spacing } from "./styles";
+import { color } from "@chakra-ui/react";
 
 const AddEmployee = ({ onAddEmployee }) => {
     const [formData, setFormData] = useState({
         name: '',
         id: '',
-        role: ''
+        role: '',
+        availability: {}
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -47,7 +49,7 @@ const AddEmployee = ({ onAddEmployee }) => {
 
             const newEmployee = await response.json();
             onAddEmployee(newEmployee);
-            setFormData({ name: '', id: '', role: '' });
+            setFormData({ name: '', id: '', role: '', availability: {} });
             alert('Employee added successfully!');
         } catch (err) {
             setError(err.message);
@@ -92,7 +94,7 @@ const AddEmployee = ({ onAddEmployee }) => {
                     <option value='stylist'>Stylist</option>
                 </select>
                 <div style={style.availabilityContainter}>
-                    <Availability />
+                    <Availability onAvailabilityChange={(avail) => setFormData(prev => ({...prev, availability: avail}))} />
                 </div>
                 {error && <p style={style.error}>{error}</p>}
                 <Button text={loading ? 'Adding...' : 'Add Employee'} type='submit' disabled={loading} />
@@ -133,6 +135,9 @@ const style = {
         margin: Spacing.small,
         padding: Spacing.small,
         fontSize: FontSizes.medium,
+        backgroundColor: Colours.teritary,
+        border: '1px solid black',
+        borderRadius: '5px',
     },
     textfield: {
         margin: Spacing.small,

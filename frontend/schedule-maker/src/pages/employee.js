@@ -7,10 +7,7 @@ import AddEmployee from '../components/addEmployee';
 
 const Employee = () => {
     const [employees, setEmployees] = useState([
-        { name: 'John Doe', id: '15001', role: 'Manager' },
-        { name: 'Jane Doe', id: '15002', role: 'Assistant' },
-        { name: 'Rick Roll', id: '15003', role: 'Key Holder' },
-        { name: 'Sponge Bob', id: '15004', role: 'Stylist' }
+
     ]);
     const [selectedTab, setSelectedTab] = useState(0);
 
@@ -28,17 +25,17 @@ const Employee = () => {
             <NavBar />
             <div style={styles.container}>
                 <div style={styles.content}>
-                    <Tabs align='center' onChange={handleTabChange}>
+                    <Tabs align='center' onChange={handleTabChange} style={styles.tabs}>
                         <TabList align='center' style={styles.tabsection}>
                             <Tab style={selectedTab === 0 ? styles.selectedTab : styles.tab}>Employee List</Tab>
                             <Tab style={selectedTab === 1 ? styles.selectedTab : styles.tab}>Add Employee</Tab>
                         </TabList>
 
-                        <TabPanels>
-                            <TabPanel>
+                        <TabPanels style={styles.tabPanels}>
+                            <TabPanel style={styles.tabPanel}>
                                 <EmployeeList employees={employees} />
                             </TabPanel>
-                            <TabPanel>
+                            <TabPanel style={styles.tabPanel}>
                                 <AddEmployee onAddEmployee={addNewEmployee} />
                             </TabPanel>
                         </TabPanels>
@@ -67,11 +64,15 @@ const styles = {
         flex: 1, // Ensure it takes up the remaining space in the container
         width: '100vw',
         height: '100%',
-        marginTop: '100px',
+        paddingTop: '100px',
     },
     title: {
         color: Colours.quaternary,
         fontSize: FontSizes.large,
+    },
+    tabs: {
+        width: '100%',
+        maxWidth: '1000px',
     },
     tabsection: {
         display: 'flex',
@@ -79,6 +80,17 @@ const styles = {
         backgroundColor: Colours.primary,
         borderRadius: '5px',
         width: '100%',
+        maxWidth: '1000px',
+    },
+    tabPanels: {
+        width: '100%',
+        maxWidth: '1000px',
+        minHeight: '450px',
+        paddingTop: '20px',
+    },
+    tabPanel: {
+        width: '100%',
+        minHeight: '400px',
     },
     tab: {
         color: Colours.quaternary,
